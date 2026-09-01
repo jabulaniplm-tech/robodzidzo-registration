@@ -1,162 +1,551 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PHY1102 Attendance Registration</title>
+    <title>Robodzidzo Registration</title>
+
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: Arial, Helvetica, sans-serif; }
-        body { min-height: 100vh; background: linear-gradient(135deg, #16004d, #3b168f, #0f172a); display: flex; justify-content: center; align-items: center; padding: 20px; }
-        .container { width: 100%; max-width: 500px; }
-        .college-header { text-align: center; color: white; margin-bottom: 18px; }
-        .logo { width: 125px; height: 125px; object-fit: contain; background: white; border-radius: 20px; padding: 8px; display: block; margin: 0 auto 12px; box-shadow: 0 8px 25px rgba(0,0,0,0.30); }
-        .college-header h1 { font-size: 22px; font-weight: 700; margin-bottom: 5px; }
-        .college-header p { font-size: 14px; opacity: 0.9; }
-        .card { background: white; border-radius: 22px; padding: 28px; box-shadow: 0 20px 50px rgba(0,0,0,0.30); }
-        .module-card { background: linear-gradient(135deg, #eef2ff, #f8fafc); border-left: 6px solid #4f46e5; border-radius: 12px; padding: 18px; margin-bottom: 25px; }
-        .module-code { font-size: 13px; font-weight: bold; color: #6366f1; letter-spacing: 1px; margin-bottom: 5px; }
-        .module-name { font-size: 18px; font-weight: bold; color: #1e1b4b; line-height: 1.35; margin-bottom: 10px; }
-        .module-details { display: flex; gap: 8px; flex-wrap: wrap; }
-        .badge { background: #e0e7ff; color: #3730a3; padding: 6px 10px; border-radius: 20px; font-size: 12px; font-weight: bold; }
-        .instruction { color: #475569; font-size: 14px; line-height: 1.5; margin-bottom: 22px; }
-        .form-group { margin-bottom: 18px; }
-        label { display: block; font-weight: bold; color: #334155; margin-bottom: 7px; font-size: 14px; }
-        .required { color: #dc2626; }
-        input, select { width: 100%; padding: 14px; border: 1px solid #cbd5e1; border-radius: 11px; font-size: 16px; outline: none; background: #f8fafc; transition: all 0.2s ease; }
-        input:focus, select:focus { border-color: #4f46e5; background: white; box-shadow: 0 0 0 3px rgba(79,70,229,0.12); }
-        .row { display: flex; gap: 12px; }
-        .row .form-group { flex: 1; }
-        .register-btn { width: 100%; padding: 16px; border: none; border-radius: 12px; background: linear-gradient(135deg, #4f46e5, #6d28d9); color: white; font-size: 17px; font-weight: bold; cursor: pointer; margin-top: 5px; transition: all 0.2s ease; }
-        .register-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(79,70,229,0.30); }
-        .register-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
-        .footer { text-align: center; color: #64748b; font-size: 11px; line-height: 1.5; margin-top: 20px; }
-        .success { display: none; text-align: center; }
-        .success-icon { width: 80px; height: 80px; margin: 0 auto 20px; border-radius: 50%; background: #dcfce7; color: #16a34a; display: flex; align-items: center; justify-content: center; font-size: 42px; font-weight: bold; }
-        .success h2 { color: #166534; margin-bottom: 12px; }
-        .success p { color: #64748b; line-height: 1.5; }
-        .another-btn { margin-top: 22px; padding: 12px 20px; border: none; border-radius: 10px; background: #e2e8f0; color: #334155; cursor: pointer; font-weight: bold; }
-        @media (max-width: 480px) { body { padding: 12px; align-items: flex-start; } .container { margin-top: 15px; } .logo { width: 105px; height: 105px; } .college-header h1 { font-size: 20px; } .card { padding: 22px; border-radius: 17px; } .module-name { font-size: 17px; } .row { flex-direction: column; gap: 0; } }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #16004d, #3b168f, #0f172a);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* MAIN CONTAINER */
+        .container {
+            width: 100%;
+            max-width: 500px;
+        }
+
+        /* COLLEGE HEADER */
+        .college-header {
+            text-align: center;
+            color: white;
+            margin-bottom: 18px;
+        }
+
+        .logo {
+            width: 125px;
+            height: 125px;
+            object-fit: contain;
+            background: white;
+            border-radius: 20px;
+            padding: 8px;
+            display: block;
+            margin: 0 auto 12px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.30);
+        }
+
+        .college-header h1 {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .college-header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        /* CARD */
+        .card {
+            background: white;
+            border-radius: 22px;
+            padding: 28px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.30);
+        }
+
+        /* MODULE INFORMATION */
+        .module-card {
+            background: linear-gradient(135deg, #eef2ff, #f8fafc);
+            border-left: 6px solid #4f46e5;
+            border-radius: 12px;
+            padding: 18px;
+            margin-bottom: 25px;
+        }
+
+        .module-code {
+            font-size: 13px;
+            font-weight: bold;
+            color: #6366f1;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+
+        .module-name {
+            font-size: 18px;
+            font-weight: bold;
+            color: #1e1b4b;
+            line-height: 1.35;
+            margin-bottom: 10px;
+        }
+
+        /* INTRODUCTION */
+        .instruction {
+            color: #475569;
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 22px;
+        }
+
+        /* FORM */
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            color: #334155;
+            margin-bottom: 7px;
+            font-size: 14px;
+        }
+
+        .required {
+            color: #dc2626;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #cbd5e1;
+            border-radius: 11px;
+            font-size: 16px;
+            outline: none;
+            background: #f8fafc;
+            transition: all 0.2s ease;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: #4f46e5;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(79,70,229,0.12);
+        }
+
+        .row {
+            display: flex;
+            gap: 12px;
+        }
+
+        .row .form-group {
+            flex: 1;
+        }
+
+        /* REGISTER BUTTON */
+        .register-btn {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #4f46e5, #6d28d9);
+            color: white;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 5px;
+            transition: all 0.2s ease;
+        }
+
+        .register-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(79,70,229,0.30);
+        }
+
+        .register-btn:disabled {
+            opacity: 0.65;
+            cursor: wait;
+            transform: none;
+        }
+
+        .status-message {
+            text-align: center;
+            margin-top: 14px;
+            padding: 10px 12px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: bold;
+            line-height: 1.4;
+            display: none;
+        }
+
+        .status-message.info {
+            display: block;
+            color: #334155;
+            background: #f1f5f9;
+        }
+
+        .status-message.error {
+            display: block;
+            color: #991b1b;
+            background: #fee2e2;
+        }
+
+        .status-message.success {
+            display: block;
+            color: #166534;
+            background: #dcfce7;
+        }
+
+        .register-btn:active {
+            transform: translateY(1px);
+        }
+
+        /* FOOTER */
+        .footer {
+            text-align: center;
+            color: #64748b;
+            font-size: 11px;
+            line-height: 1.5;
+            margin-top: 20px;
+        }
+
+        /* SUCCESS SCREEN */
+        .success {
+            display: none;
+            text-align: center;
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            background: #dcfce7;
+            color: #16a34a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 42px;
+            font-weight: bold;
+        }
+
+        .success h2 {
+            color: #166534;
+            margin-bottom: 12px;
+        }
+
+        .success p {
+            color: #64748b;
+            line-height: 1.5;
+        }
+
+        .another-btn {
+            margin-top: 22px;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 10px;
+            background: #e2e8f0;
+            color: #334155;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* MOBILE */
+        @media (max-width: 480px) {
+            body {
+                padding: 12px;
+                align-items: flex-start;
+            }
+
+            .container {
+                margin-top: 15px;
+            }
+
+            .logo {
+                width: 105px;
+                height: 105px;
+            }
+
+            .college-header h1 {
+                font-size: 20px;
+            }
+
+            .card {
+                padding: 22px;
+                border-radius: 17px;
+            }
+
+            .module-name {
+                font-size: 17px;
+            }
+
+            .row {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
     </style>
 </head>
+
 <body>
+
 <div class="container">
+
+    <!-- COLLEGE HEADER -->
     <div class="college-header">
-        <img src="logo.png" alt="Mutare Teachers' College Logo" class="logo">
-        <h1>MUTARE TEACHERS' COLLEGE</h1>
-        <p>First Lecture Attendance & Registration</p>
+        <img src="logo.jpg" alt="First Class Academy Logo" class="logo">
+        <h1>FIRST CLASS ACADEMY</h1>
+        <p>Robodzidzo Registration</p>
     </div>
 
+    <!-- REGISTRATION CARD -->
     <div class="card" id="registrationCard">
+
+        <!-- MODULE INFORMATION -->
         <div class="module-card">
-            <div class="module-code">PHY1101</div>
-            <div class="module-name">Mechanical Properties of Materials and Fluids</div>
-            <div class="module-details">
-                <span class="badge">First Year</span>
-                <span class="badge">First Semester</span>
-                <span class="badge">2026</span>
-            </div>
+            <div class="module-code">ROBODZIDZO</div>
+            <div class="module-name">Hands On Robotics Training</div>
         </div>
 
+        <!-- INSTRUCTIONS -->
         <p class="instruction">
-            Welcome to PHY1101. Please enter your details below to capture your first-day attendance.
+            Welcome to FCA Robotics Training Clinic. Please enter your details below to register.
         </p>
 
+        <!-- FORM -->
         <form id="registrationForm">
+
+            <!-- NAME -->
             <div class="row">
                 <div class="form-group">
-                    <label for="firstName">First Name <span class="required">*</span></label>
-                    <input type="text" id="firstName" name="firstName" placeholder="Enter first name" required>
+                    <label for="firstName">
+                        First Name <span class="required">*</span>
+                    </label>
+                    <input
+                        type="text"
+                        id="firstName"
+                        name="firstName"
+                        placeholder="Enter first name"
+                        autocomplete="given-name"
+                        required
+                    >
                 </div>
+
                 <div class="form-group">
-                    <label for="surname">Surname <span class="required">*</span></label>
-                    <input type="text" id="surname" name="surname" placeholder="Enter surname" required>
+                    <label for="surname">
+                        Surname <span class="required">*</span>
+                    </label>
+                    <input
+                        type="text"
+                        id="surname"
+                        name="surname"
+                        placeholder="Enter surname"
+                        autocomplete="family-name"
+                        required
+                    >
                 </div>
             </div>
 
+            <!-- SCHOOL NAME -->
             <div class="form-group">
-                <label for="studentId">Student ID <span class="required">*</span></label>
-                <input type="text" id="studentId" name="studentId" placeholder="e.g. MTC12345" required>
+                <label for="schoolName">
+                    School <span class="required">*</span>
+                </label>
+                <input
+                    type="text"
+                    id="schoolName"
+                    name="schoolName"
+                    placeholder="e.g. Mutare Boys High School"
+                    autocomplete="off"
+                    required
+                >
             </div>
 
+            <!-- PHONE -->
             <div class="form-group">
-                <label for="phone">Phone Number <span class="required">*</span></label>
-                <input type="tel" id="phone" name="phone" placeholder="e.g. 0771234567" required>
+                <label for="phone">
+                    Phone Number <span class="required">*</span>
+                </label>
+                <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    placeholder="e.g. 0771234567"
+                    autocomplete="tel"
+                    required
+                >
             </div>
 
+            <!-- FORM LEVEL -->
             <div class="form-group">
-                <label for="year">Year of Study <span class="required">*</span></label>
-                <select id="year" name="year" required>
-                    <option value="">Select year</option>
-                    <option value="First Year" selected>First Year</option>
-                    <option value="Second Year">Second Year</option>
-                    <option value="Third Year">Third Year</option>
+                <label for="formLevel">
+                    Form Level <span class="required">*</span>
+                </label>
+                <select id="formLevel" name="formLevel" required>
+                    <option value="">Select form level</option>
+                    <option value="Form One">Form One</option>
+                    <option value="Form Two">Form Two</option>
+                    <option value="Form Three">Form Three</option>
+                    <option value="Form Four">Form Four</option>
+                    <option value="Form Five">Form Five</option>
+                    <option value="Form Six">Form Six</option>
+                    <option value="Teacher">Teacher</option>
                 </select>
             </div>
 
-            <button type="submit" class="register-btn" id="submitBtn">REGISTER FOR PHY1102</button>
+            <!-- REGISTER BUTTON -->
+            <button type="submit" class="register-btn" id="registerBtn">
+                REGISTER FOR ROBODZIDZO
+            </button>
+
         </form>
 
         <div class="footer">
-            By submitting this form, you confirm that your details are accurate.
+            By submitting this form, you confirm that the information provided is correct.
         </div>
+
     </div>
 
+    <!-- SUCCESS CARD -->
     <div class="card success" id="successCard">
         <div class="success-icon">✓</div>
-        <h2>Attendance Recorded!</h2>
-        <p>Your registration for <strong>PHY1102</strong> has been logged to the attendance database.</p>
-        <button class="another-btn" onclick="registerAnother()">Register Another Student</button>
+        <h2>Registration Successful!</h2>
+        <p>Your registration for <strong>ROBODZIDZO</strong> has been recorded.</p>
+        <p id="successStudent" style="margin-top:10px; font-weight:bold; color:#334155;"></p>
+        <p style="margin-top:10px;">Hands On Training for Robotics</p>
+
+        <button class="another-btn" onclick="registerAnother()">
+            Register Another Student
+        </button>
     </div>
+
 </div>
 
 <script>
-    // PASTE YOUR GOOGLE APPS SCRIPT WEB APP URL HERE
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw-0lXmf-2K6LGwwLr2-QkzAUr1rwC41hhgK3QGlfEfj1brpe1qn9voh81AGdNv0IGh/exec";
+    // =========================================================
+    // ROBODZIDZO REGISTRATION
+    // GitHub Pages -> Google Apps Script -> Google Sheets
+    // =========================================================
+
+    const API_URL = "https://script.google.com/macros/s/AKfycby4_hzRJZqyUbUZMdWoOuhZUlxK_NkbeN0KDnBWBw8jBbv5i6_sH7swn3dFasvfXe8G9g/exec";
 
     const form = document.getElementById("registrationForm");
     const registrationCard = document.getElementById("registrationCard");
     const successCard = document.getElementById("successCard");
-    const submitBtn = document.getElementById("submitBtn");
+    const registerBtn = document.getElementById("registerBtn");
+    const successStudent = document.getElementById("successStudent");
 
-    form.addEventListener("submit", function(event) {
+    // Status box
+    const statusMessage = document.createElement("div");
+    statusMessage.className = "status-message";
+    registerBtn.insertAdjacentElement("afterend", statusMessage);
+
+    // Auto-generate Registration ID
+    function generateStudentId() {
+        const randomNum = Math.floor(1000 + Math.random() * 9000);
+        return "ROBO-" + Date.now().toString().slice(-6) + "-" + randomNum;
+    }
+
+    // Normalise Zimbabwean phone numbers
+    function normalisePhone(phone) {
+        let value = String(phone || "").trim().replace(/[\s()-]/g, "");
+
+        if (value.startsWith("00")) {
+            value = "+" + value.substring(2);
+        }
+        if (value.startsWith("+263")) {
+            return value;
+        }
+        if (value.startsWith("263")) {
+            return "+" + value;
+        }
+        if (value.startsWith("0")) {
+            return "+263" + value.substring(1);
+        }
+        return value;
+    }
+
+    function showStatus(message, type) {
+        statusMessage.textContent = message;
+        statusMessage.className = "status-message " + type;
+    }
+
+    // Submit registration
+    form.addEventListener("submit", async function(event) {
         event.preventDefault();
-        submitBtn.disabled = true;
-        submitBtn.innerText = "Submitting...";
+
+        const firstName = document.getElementById("firstName").value.trim();
+        const surname = document.getElementById("surname").value.trim();
+        const schoolName = document.getElementById("schoolName").value.trim();
+        const phone = normalisePhone(document.getElementById("phone").value);
+        const formLevel = document.getElementById("formLevel").value;
+
+        // Auto-generate ID
+        const studentId = generateStudentId();
+
+        // Client-side validation
+        if (!firstName || !surname || !schoolName || !phone || !formLevel) {
+            showStatus("Please complete all required fields.", "error");
+            return;
+        }
+
+        document.getElementById("phone").value = phone;
+
+        registerBtn.disabled = true;
+        registerBtn.textContent = "SUBMITTING...";
+        showStatus("Saving your registration...", "info");
 
         const payload = {
-            firstName: document.getElementById("firstName").value,
-            surname: document.getElementById("surname").value,
-            studentId: document.getElementById("studentId").value,
-            phone: document.getElementById("phone").value,
-            year: document.getElementById("year").value,
-            module: "PHY1102",
-            moduleName: "Physics Principles & Applications"
+            studentId: studentId,
+            firstName: firstName,
+            surname: surname,
+            schoolName: schoolName,
+            phone: phone,
+            formLevel: formLevel,
+            module: "ROBODZIDZO",
+            moduleName: "Hands On Robotics Training"
         };
 
-        fetch(SCRIPT_URL, {
-            method: "POST",
-            mode: "no-cors",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload)
-        })
-        .then(() => {
+        try {
+            await fetch(API_URL, {
+                method: "POST",
+                mode: "no-cors",
+                headers: {
+                    "Content-Type": "text/plain;charset=utf-8"
+                },
+                body: JSON.stringify(payload)
+            });
+
+            console.log("Robodzidzo registration submitted:", payload);
+
+            successStudent.innerHTML = "Registration ID: <strong>" + studentId + "</strong><br>Name: " + firstName + " " + surname + "<br>School: " + schoolName + " (" + formLevel + ")";
+
             registrationCard.style.display = "none";
             successCard.style.display = "block";
-            submitBtn.disabled = false;
-            submitBtn.innerText = "REGISTER FOR PHY1102";
-        })
-        .catch(err => {
-            alert("Error submitting form. Please check network connectivity.");
-            submitBtn.disabled = false;
-            submitBtn.innerText = "REGISTER FOR PHY1102";
-        });
+
+        } catch (error) {
+            console.error(error);
+            registerBtn.disabled = false;
+            registerBtn.textContent = "REGISTER FOR ROBODZIDZO";
+            showStatus("Could not contact the registration server. Please check your internet connection and try again.", "error");
+        }
     });
 
     function registerAnother() {
         form.reset();
+        statusMessage.textContent = "";
+        statusMessage.className = "status-message";
+        registerBtn.disabled = false;
+        registerBtn.textContent = "REGISTER FOR ROBODZIDZO";
         successCard.style.display = "none";
         registrationCard.style.display = "block";
+        document.getElementById("firstName").focus();
     }
 </script>
+
 </body>
 </html>
