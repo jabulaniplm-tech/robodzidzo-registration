@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHY1102 Attendance Registration</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: Arial, Helvetica, sans-serif; }
+        body { min-height: 100vh; background: linear-gradient(135deg, #16004d, #3b168f, #0f172a); display: flex; justify-content: center; align-items: center; padding: 20px; }
+        .container { width: 100%; max-width: 500px; }
+        .college-header { text-align: center; color: white; margin-bottom: 18px; }
+        .logo { width: 125px; height: 125px; object-fit: contain; background: white; border-radius: 20px; padding: 8px; display: block; margin: 0 auto 12px; box-shadow: 0 8px 25px rgba(0,0,0,0.30); }
+        .college-header h1 { font-size: 22px; font-weight: 700; margin-bottom: 5px; }
+        .college-header p { font-size: 14px; opacity: 0.9; }
+        .card { background: white; border-radius: 22px; padding: 28px; box-shadow: 0 20px 50px rgba(0,0,0,0.30); }
+        .module-card { background: linear-gradient(135deg, #eef2ff, #f8fafc); border-left: 6px solid #4f46e5; border-radius: 12px; padding: 18px; margin-bottom: 25px; }
+        .module-code { font-size: 13px; font-weight: bold; color: #6366f1; letter-spacing: 1px; margin-bottom: 5px; }
+        .module-name { font-size: 18px; font-weight: bold; color: #1e1b4b; line-height: 1.35; margin-bottom: 10px; }
+        .module-details { display: flex; gap: 8px; flex-wrap: wrap; }
+        .badge { background: #e0e7ff; color: #3730a3; padding: 6px 10px; border-radius: 20px; font-size: 12px; font-weight: bold; }
+        .instruction { color: #475569; font-size: 14px; line-height: 1.5; margin-bottom: 22px; }
+        .form-group { margin-bottom: 18px; }
+        label { display: block; font-weight: bold; color: #334155; margin-bottom: 7px; font-size: 14px; }
+        .required { color: #dc2626; }
+        input, select { width: 100%; padding: 14px; border: 1px solid #cbd5e1; border-radius: 11px; font-size: 16px; outline: none; background: #f8fafc; transition: all 0.2s ease; }
+        input:focus, select:focus { border-color: #4f46e5; background: white; box-shadow: 0 0 0 3px rgba(79,70,229,0.12); }
+        .row { display: flex; gap: 12px; }
+        .row .form-group { flex: 1; }
+        .register-btn { width: 100%; padding: 16px; border: none; border-radius: 12px; background: linear-gradient(135deg, #4f46e5, #6d28d9); color: white; font-size: 17px; font-weight: bold; cursor: pointer; margin-top: 5px; transition: all 0.2s ease; }
+        .register-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(79,70,229,0.30); }
+        .register-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+        .footer { text-align: center; color: #64748b; font-size: 11px; line-height: 1.5; margin-top: 20px; }
+        .success { display: none; text-align: center; }
+        .success-icon { width: 80px; height: 80px; margin: 0 auto 20px; border-radius: 50%; background: #dcfce7; color: #16a34a; display: flex; align-items: center; justify-content: center; font-size: 42px; font-weight: bold; }
+        .success h2 { color: #166534; margin-bottom: 12px; }
+        .success p { color: #64748b; line-height: 1.5; }
+        .another-btn { margin-top: 22px; padding: 12px 20px; border: none; border-radius: 10px; background: #e2e8f0; color: #334155; cursor: pointer; font-weight: bold; }
+        @media (max-width: 480px) { body { padding: 12px; align-items: flex-start; } .container { margin-top: 15px; } .logo { width: 105px; height: 105px; } .college-header h1 { font-size: 20px; } .card { padding: 22px; border-radius: 17px; } .module-name { font-size: 17px; } .row { flex-direction: column; gap: 0; } }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="college-header">
+        <img src="logo.png" alt="Mutare Teachers' College Logo" class="logo">
+        <h1>MUTARE TEACHERS' COLLEGE</h1>
+        <p>First Lecture Attendance & Registration</p>
+    </div>
+
+    <div class="card" id="registrationCard">
+        <div class="module-card">
+            <div class="module-code">PHY1101</div>
+            <div class="module-name">Mechanical Properties of Materials and Fluids</div>
+            <div class="module-details">
+                <span class="badge">First Year</span>
+                <span class="badge">First Semester</span>
+                <span class="badge">2026</span>
+            </div>
+        </div>
+
+        <p class="instruction">
+            Welcome to PHY1101. Please enter your details below to capture your first-day attendance.
+        </p>
+
+        <form id="registrationForm">
+            <div class="row">
+                <div class="form-group">
+                    <label for="firstName">First Name <span class="required">*</span></label>
+                    <input type="text" id="firstName" name="firstName" placeholder="Enter first name" required>
+                </div>
+                <div class="form-group">
+                    <label for="surname">Surname <span class="required">*</span></label>
+                    <input type="text" id="surname" name="surname" placeholder="Enter surname" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="studentId">Student ID <span class="required">*</span></label>
+                <input type="text" id="studentId" name="studentId" placeholder="e.g. MTC12345" required>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone Number <span class="required">*</span></label>
+                <input type="tel" id="phone" name="phone" placeholder="e.g. 0771234567" required>
+            </div>
+
+            <div class="form-group">
+                <label for="year">Year of Study <span class="required">*</span></label>
+                <select id="year" name="year" required>
+                    <option value="">Select year</option>
+                    <option value="First Year" selected>First Year</option>
+                    <option value="Second Year">Second Year</option>
+                    <option value="Third Year">Third Year</option>
+                </select>
+            </div>
+
+            <button type="submit" class="register-btn" id="submitBtn">REGISTER FOR PHY1102</button>
+        </form>
+
+        <div class="footer">
+            By submitting this form, you confirm that your details are accurate.
+        </div>
+    </div>
+
+    <div class="card success" id="successCard">
+        <div class="success-icon">✓</div>
+        <h2>Attendance Recorded!</h2>
+        <p>Your registration for <strong>PHY1102</strong> has been logged to the attendance database.</p>
+        <button class="another-btn" onclick="registerAnother()">Register Another Student</button>
+    </div>
+</div>
+
+<script>
+    // PASTE YOUR GOOGLE APPS SCRIPT WEB APP URL HERE
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw-0lXmf-2K6LGwwLr2-QkzAUr1rwC41hhgK3QGlfEfj1brpe1qn9voh81AGdNv0IGh/exec";
+
+    const form = document.getElementById("registrationForm");
+    const registrationCard = document.getElementById("registrationCard");
+    const successCard = document.getElementById("successCard");
+    const submitBtn = document.getElementById("submitBtn");
+
+    form.addEventListener("submit", function(event) {
+        event.preventDefault();
+        submitBtn.disabled = true;
+        submitBtn.innerText = "Submitting...";
+
+        const payload = {
+            firstName: document.getElementById("firstName").value,
+            surname: document.getElementById("surname").value,
+            studentId: document.getElementById("studentId").value,
+            phone: document.getElementById("phone").value,
+            year: document.getElementById("year").value,
+            module: "PHY1102",
+            moduleName: "Physics Principles & Applications"
+        };
+
+        fetch(SCRIPT_URL, {
+            method: "POST",
+            mode: "no-cors",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+        })
+        .then(() => {
+            registrationCard.style.display = "none";
+            successCard.style.display = "block";
+            submitBtn.disabled = false;
+            submitBtn.innerText = "REGISTER FOR PHY1102";
+        })
+        .catch(err => {
+            alert("Error submitting form. Please check network connectivity.");
+            submitBtn.disabled = false;
+            submitBtn.innerText = "REGISTER FOR PHY1102";
+        });
+    });
+
+    function registerAnother() {
+        form.reset();
+        successCard.style.display = "none";
+        registrationCard.style.display = "block";
+    }
+</script>
+</body>
+</html>
